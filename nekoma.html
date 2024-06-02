@@ -272,45 +272,52 @@
 	</body>
 
 	<script>
-		
 		$(document).ready(function(){
 			var zindex = 10;
 			
-			$(".card").click(function(e){
+			function checkShowCard(e) {
 				// 防止點擊事件的默認行為發生
 				e.preventDefault(); 
 				var isShowing = false;
+				var card = e.currentTarget;
+
 				// 檢查點擊的卡片是否具有 class: show ，如果有，將 isShowing 設置為 true
-				if ($(this).hasClass("show")) {
-					isShowing = true
+				if (card.classList.contains('show')) {
+					isShowing = true;
 				}
 
 				// 檢查是否有任何卡片正在顯示。如果有，移除當前顯示卡片的 show 
-				if ($(".cards").hasClass("showing")) {
-					
-					$(".card.show").removeClass("show");
+				if (document.querySelector('.cards').classList.contains('showing')) {
+					document.querySelectorAll('.card.show').forEach(function(showingCard) {
+						showingCard.classList.remove('show');
+					});
 
 					if (isShowing) {
 						// 如果點擊的卡片已經顯示，則重置，移除 showing 
-						$(".cards").removeClass("showing");
+						document.querySelector('.cards').classList.remove('showing');
 					} else {
 						// 如果點擊的卡片未顯示，則將其 z-index 設置為當前的 zindex 值並添加 show ，以顯示卡片。
-						$(this)
-						.css({zIndex: zindex})
-						.addClass("show");
+						card.style.zIndex = zindex;
+						card.classList.add('show');
 					}
 					// 遞增 zindex
 					zindex++;
 				} else {
 					// 如果沒有任何卡片顯示，則添加 showing 到.cards
-					$(".cards").addClass("showing");
+					document.querySelector('.cards').classList.add('showing');
 					// 將點擊卡片的 z-index 設置為當前的 zindex 值並添加 show ，以顯示卡片。
-					$(this).css({zIndex:zindex}).addClass("show");
+					card.style.zIndex = zindex;
+					card.classList.add('show');
 					// 遞增 zindex
 					zindex++;
 				}
+			}
+
+			// 為所有卡片添加點擊事件監聽器
+			document.querySelectorAll('.card').forEach(function(card) {
+				card.addEventListener('click', checkShowCard);
 			});
-		});
+    	});
 		
 	</script>
 
