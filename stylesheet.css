@@ -2,9 +2,8 @@
 *{
 	padding: 0;
 	margin:0;
-	cursor: pointer;
 
-	box-sizing: border-box; /* 寬高設定會包含到border */
+	/* box-sizing: border-box; 寬高設定會包含到border */
 }
 
 video {
@@ -519,7 +518,7 @@ h1 {
 /* 當滑鼠懸浮在目前卡片上時，目前卡片的翻轉角度為 0，並放大 1.2, 5 倍，並加陰影 */
 .fukuroShell .fukuroBox:hover {
 	transform: rotateY(0deg) scale(1.25);
-	fukuroBox-shadow: 0 25px 40px rgba(0, 0, 0, 0.7);
+	box-shadow: 0 25px 40px rgba(0, 0, 0, 0.7);
 	z-index: 1;
 }
 
