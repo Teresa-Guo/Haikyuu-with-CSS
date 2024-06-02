@@ -88,7 +88,7 @@ h1 {
 	justify-content: center;
 	display: grid;
 	/* 設置兩列的高度為3:1 */
-	grid-template-rows: 3fr 1fr; 
+	grid-template-rows: 3fr 1fr;
 }
 
 .indexBox{
@@ -132,6 +132,7 @@ h1 {
 	z-index: calc((var(--position)-var(--abs)));
 	box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.6);
 	border-radius: 5px;
+	
 }
 
 /* 讓整個圖片都可以點到連結 */
@@ -481,7 +482,7 @@ h1 {
 	background-image: url('./image/fukurodani.jpg');
 	background-size: cover;
 	background-position: center;
-	opacity: 0.6; /* 設定透明度 */
+	opacity: 0.8; /* 設定透明度 */
 	z-index: -1; /* 將其放置在所有其他內容下面 */
 }
 
@@ -495,6 +496,14 @@ h1 {
 	transform-style: preserve-3d;
 	/* 增加透視效果 */
 	perspective: 900px;
+}
+
+.fukuroBox {
+	transition: opacity 0.3s ease-in-out;
+}
+
+.fukuroBox.dim {
+	opacity: 0.7;
 }
 
 .fukuroShell .fukuroBox {

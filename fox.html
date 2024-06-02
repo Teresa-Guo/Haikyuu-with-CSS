@@ -1,23 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 	<head>
 	
 		<meta charset="UTF-8">
 		<title>稻荷崎</title>
-		<link rel="stylesheet" href="stylesheet.css">
+		
+		<style>
+		
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+			
+			.background {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-image: url('./image/inarizaki.png');
+				background-size: cover;
+				background-position: center;
+				opacity: 0.5; /* 設定透明度 */
+				z-index: -1; /* 將其放置在所有其他內容下面 */
+			}
+			
+			#back_btn {       
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				font-size: 30px;
+				text-decoration: none;
+				color: #ff6e94; 
+				font-weight: bold; 
+			}
+			
+			.shell{
+				width: 90%;
+				height: 400px;
+				display: flex;
+			}
+			
+			.box{
+				flex: 1;
+				overflow: hidden;
+				transition: .5s;
+				margin: 0 20px;
+				box-shadow: 10px 10px 20px rgba(0, 0, 0, .5);
+				border-radius: 20px;
+				border: 5px solid #fff;
+				background-color: #fff;
+			}
+			
+			.box>img{
+				width: 100%;
+				height: 75%;
+				object-fit: cover;
+				transition: .5s;
+			}
+			
+			.box>span{
+				font: 200 45px;
+				text-align: center;
+				height: 25%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			.box:hover{
+				flex-basis: 50%;
+			}
+			
+			.box:hover>img{
+				width: 100%;
+				height: 100%;
+			}
+			
+		</style>
 		
 	</head>
 
-	<body id="foxBody">
+	<body>
 		
 		<a href="index.html" id="back_btn">&#8592;</a>
 		
-		<div class="foxBackground"></div>
+		<div class="background"></div>
 		
-		<div class="foxShell">
+		<div class="shell">
 		
-			<div class="foxBox">
+			<div class="box">
 				<img src="./image/ginjima_1.jpg">
 				<span>
 					銀島結<br>
@@ -27,7 +106,7 @@
 				</span>
 			</div>
 			
-			<div class="foxBox">
+			<div class="box">
 				<img src="./image/aran_1.jpg">
 				<span>
 					尾白阿蘭<br>
@@ -37,7 +116,7 @@
 				</span>
 			</div>
 			
-			<div class="foxBox">
+			<div class="box">
 				<img src="./image/osamu_1.jpeg">
 				<span>
 					宮治<br>
@@ -47,7 +126,7 @@
 				</span>
 			</div>
 			
-			<div class="foxBox">
+			<div class="box">
 				<img src="./image/atsumu_1.jpg">
 				<span>
 					宮侑<br>
@@ -57,7 +136,7 @@
 				</span>
 			</div>
 			
-			<div class="foxBox">
+			<div class="box">
 				<img src="./image/kita_1.jpg">
 				<span>
 					北信介<br>
@@ -67,7 +146,7 @@
 				</span>
 			</div>
 			
-			<div class="foxBox">
+			<div class="box">
 				<img src="./image/suna_1.jpg">
 				<span>
 					角名倫太郎<br>
@@ -77,7 +156,7 @@
 				</span>
 			</div>
 			
-			<div class="foxBox">
+			<div class="box">
 				<img src="./image/akagi_1.jpg">
 				<span>
 					赤木路成<br>
