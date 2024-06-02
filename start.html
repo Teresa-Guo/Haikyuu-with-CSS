@@ -39,10 +39,19 @@
 		var flag = 0;
 
 		function showImage() {
-			video.fadeOut(500, function() {
-				image.css('opacity', '1');
-				$('#hintText').text('點擊進入主頁面');
-			});
+			var video = document.getElementById('PV');
+			var image = document.getElementById('endImage');
+			var hintText = document.getElementById('hintText');
+
+			// 使用 CSS transition 達到 fadeOut 效果
+			video.style.transition = 'opacity 0.5s';
+			video.style.opacity = '0';
+
+			// 設定圖片透明度為 1
+			image.style.opacity = '1';
+
+			// 修改提示文字
+			hintText.textContent = '點擊進入主頁面';
 		}
 
 		video.on('ended', function() {
