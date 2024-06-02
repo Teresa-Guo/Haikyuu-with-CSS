@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="UTF-8">
+		<title>Haikyuu</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<link rel="stylesheet" href="stylesheet.css">
+
+	</head>
+
+	<body>
+	
+		<video id="PV" autoplay muted >
+			<source src="startVideo.mp4" type="video/mp4">
+		</video>
+
+		<p id="hintText">點擊跳過影片</p>
+		
+		<img id="endImage" src="image/startImg.jpg" style="opacity: 0;">
+
+		<div id="login">
+		
+			<h1>登入</h1>
+			<form id="form" onsubmit="validate(); return false;">
+				<input type="text" id="name" name="name" placeholder="Your Name" required>
+				<input type="submit" value="Submit">
+			</form>
+			
+		</div>
+		
+	</body>
+
+	<script>
+	
+		var video = $('#PV');
+		var image = $('#endImage');
+		var flag = 0;
+
+		function showImage() {
+			video.fadeOut(500, function() {
+				image.css('opacity', '1');
+				$('#hintText').text('點擊進入主頁面');
+			});
+		}
+
+		video.on('ended', function() {
+			showImage();
+			flag=1;
+		});
+
+		// Event listener for screen click to skip video
+		$(document).on('click', function() {
+			if (flag === 0) {
+				showImage();
+				flag = 1;
+			} else {
+				$('#login').fadeIn();
+			}
+		}); 
+
+		function validate() {
+			var name = $('#name').val();
+
+			if (name) {
+				 // window.location.href 表示當前視窗的 URL，透過重新指定可以將當前頁面連向指定的 URL
+				 window.location.href = "index.html"
+			} 
+		}
+		
+	</script>
+
+</html>

@@ -1,0 +1,627 @@
+/* start.html */
+*{
+	padding: 0;
+	margin:0;
+	cursor: pointer;
+
+	box-sizing: border-box; /* 寬高設定會包含到border */
+}
+
+video, img{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	object-fit: cover;
+}
+
+#hintText {
+	position: absolute;
+	bottom: 20px;
+	width: 100%;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	/* 確保字不會被遮住 */
+	z-index: 1; 
+}
+
+#login {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(0, 0, 0, 0.8);
+	padding: 10px;
+	border-radius: 10px;
+	text-align: center;
+	width: 30%;
+}
+		
+h1 {
+	color: #ffffff;
+	padding: 5px;
+}
+
+#login input {
+	display: block;
+	width: 80%;
+	margin: 10px auto;
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+}
+
+#login input[type="submit"] {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: #FFA500;
+	color: white;
+	font-size: 20px;
+}
+
+/* index.html */
+#indexBody {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* 和視窗一樣大 */
+	height: 100vh; 
+	background-image: url(image/background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.indexShell{
+	justify-content: center;
+	display: grid;
+	/* 設置兩列的高度為3:1 */
+	grid-template-rows: 3fr 1fr; 
+}
+
+.indexBox{
+	/* 將容器放在第一列，其高度為第一列的高度*/
+	grid-row: 1/2;
+	/* 將容器放在第一行，其寬度為第一到第七行的寬度 */
+	grid-column: 1/7;
+	width: 100vw;
+	/* 視窗高度的3/4 */
+	height: 75vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* 自動隱藏超出的文字或圖片。 */
+	overflow: hidden; 
+	/* 設置3D轉換，以便創建立體效果 */
+	transform-style: preserve-3d;
+	/* 定義容器內包含的數量 */
+	--items: 4;
+	/* 定義容器內居中顯示的數量 */
+	--middle: 3;
+	/* 定義容器當前位置的元素 */
+	--position: 1;
+}
+
+.item {
+	position: absolute;
+	width: 590px;
+	height: 350px;
+	background-color: antiquewhite;
+	/* 宣告變數: --自訂名稱；取值: var (--變數名稱) */
+	/* 定義一個CSS變數 --r 的值為var(--position)-var(--offset)，用於控制元素的位置和旋轉角度*/
+	--r: calc(var(--position) - var(--offset));
+	/* 定義變數 --abs 的值為 var(--r)*-1 和 var(--r) 中的最大值，可以想像為取 var(--r) 的絕對值*/
+	--abs: max(calc(var(--r)*-1), var(--r));
+	/* 元素的過度效果為所有屬性在0.25秒內以線性方式變化 */
+	transition: all 0.5s linear;
+	/* 選轉-10deg*var(--r)角度，並向X維負方向平移-650px*var(--r) */
+	transform: rotateY(calc(-10deg*var(--r))) translateX(calc(-650px*var(--r)));
+	/* 使當前的圖片位於最前面，當 position 和 offset 的距離越大，z-index就會越小 */
+	z-index: calc((var(--position)-var(--abs)));
+	box-shadow: 0px 9px 10px rgba(0, 0, 0, 0.6);
+	border-radius: 5px;
+}
+
+/* 讓整個圖片都可以點到連結 */
+.item a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.multiSelect {
+	width: 35px;
+	height: 35px;
+	margin: 10px;
+}
+
+.indexBox .item:nth-child(1) {
+	--offset:1;
+	background-image: url(image/烏野橫幅.jpg);
+	background-size: 500px 350px;
+}
+.indexBox .item:nth-child(2) {
+	--offset:2;
+	background-image: url(image/音駒橫幅.jpg);
+	background-size: 570px 320px;
+}
+.indexBox .item:nth-child(3) {
+	--offset:3;
+	background-image: url(image/梟谷橫幅.jpg);
+	background-size: 600px 350px;
+}
+.indexBox .item:nth-child(4) {
+	--offset:4;
+	background-image: url(image/稻荷崎橫幅.jpeg);
+	background-size: 600px 350px;
+}
+
+.multiSelect:nth-of-type(1) {
+	/* 放在網格的第二行和第三行之間 */
+	grid-column: 2/3;
+	/* 放在網格的第二列和第三行列之間 */
+	grid-row: 2/3;
+}
+.multiSelect:nth-of-type(2) {
+	grid-column: 3/4;
+	grid-row: 2/3;
+}
+.multiSelect:nth-of-type(3) {
+	grid-column: 4/5;
+	grid-row: 2/3;
+}
+.multiSelect:nth-of-type(4) {
+	grid-column: 5/6;
+	grid-row: 2/3;
+}
+
+.multiSelect:nth-of-type(1):checked~.indexBox {
+	--position: 1;
+}
+.multiSelect:nth-of-type(2):checked~.indexBox {
+	--position: 2;
+}
+.multiSelect:nth-of-type(3):checked~.indexBox {
+	--position: 3;
+}
+.multiSelect:nth-of-type(4):checked~.indexBox {
+	--position: 4;
+}
+
+/*karasuno.html*/
+#karasunoBody {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	background-image: url(image/karasuno_background.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.characters {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.container-inner {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.circle {
+	position: absolute;
+	background-color: var(--color);
+	border-radius: 50%;
+}
+
+.img {
+	width: 100%;
+	transform: translateY(20px) scale(1);
+	transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+	
+	object-position: 0 0;
+	box-sizing: border-box;
+	height: 200%;
+}
+
+.divider {
+	height: 3px;
+	width: 50%;
+	border-radius: 5px;
+	background-color: var(--color);
+}
+
+.characters h1 {
+	color: white;
+	margin:  0 0;
+}
+
+.characters p {
+	color: white;
+	margin: 0;
+}
+
+.container:hover .img {
+	transform: scale(1);
+}
+
+.karasunoTable {
+	margin: 5px;
+	width: 90vw;
+	height: 45vh;
+}
+
+.karasunoTable td {
+	width: 25vw;
+	text-align: center;
+}
+
+#back_btn {       
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 30px;
+	text-decoration: none;
+	color: #ff6e94; 
+	font-weight: bold; 
+}
+
+/* nekoma.html */
+#nekomaBody {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	/*透明度 0.5 的黑色半透明遮罩 */
+	background-color: rgba(0, 0, 0, .5);
+	/*設置背景混和模式為相乘模式 */
+	background-blend-mode: multiply;
+	background-image: url(image/nekoma_background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.btn {
+	background: #a00000;
+	border-radius: 4px;
+	box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
+	color: #ffffff;
+	display: inline-block;
+	padding: 6px 30px 8px;
+	position: relative;
+	/* 超連結預設底線去除 */
+	text-decoration: none;
+	transition: all 0.1s 0s ease-out;
+}
+
+.cards {
+				margin: 0;
+				text-align: center;
+				width: 90vw;
+				height: 90vh;
+			}
+
+.card {
+	width:80%;
+	height: 80%;
+	background: #ffffff;
+	/* 元素可以在行內排列，但又可以設置寬度和高度。 */
+	display: inline-block;
+	position: relative;
+	text-align: left;
+	transition: all 0.3s 0s ease-in;
+	z-index: 1;
+}
+
+.card img {
+	width: 100%;
+	height: 100%;
+}
+
+.card-title {
+	background: #ffffff;
+	padding: 6px 15px 10px;
+	position: relative;
+	z-index: 0;
+}
+
+.toggle-info {
+	border-radius: 32px;
+	height: 32px;
+	padding: 0;
+	position: absolute;
+	right: 15px;
+	top: 10px;
+	width: 32px;
+}
+
+.toggle-info span {
+	background: #ffffff;
+	display: block;
+	height: 2px;
+	position: absolute;
+	top: 16px;
+	transition: all 0.15s 0s ease-out;
+	width: 12px;
+}
+
+.left {
+	right: 14px;
+	transform: rotate(45deg);
+}
+
+.right {
+	left: 14px;
+	transform: rotate(-45deg);
+}
+
+.card-title h2 {
+	font-size: 24px;
+	font-weight: 700;
+	letter-spacing: -0.05em;
+	margin: 0;
+	padding: 0;
+}
+
+.card-description {
+	padding: 0 15px 10px;
+	position: relative;
+}
+
+.card-actions {
+	box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+	padding: 10px 15px;
+	text-align: center;
+}
+
+.card-flap {
+	background: #d9d9d9;
+	position: absolute;
+	width: 100%;
+	/* 變形原點為頂部 */
+	transform-origin: top;
+	/* 正面翻轉到頂部 */
+	transform: rotateX(-90deg);
+}
+
+.flap1 {
+	transition: all 0.3s 0.3s ease-out;
+	z-index: -1;
+}
+
+.flap2 {
+	transition: all 0.3s 0s ease-out;
+	z-index: -2;
+}
+
+.cards.showing .card {
+	cursor: pointer;
+	opacity: 0.6;
+	transform: scale(0.88);
+}
+
+.card.show { /* 當 card 元素具有 show 類名時，透明度設定為完全不透，並且縮放比例設定為原始大小 */
+	/* !important 提高該屬性的優先級，確保此樣式覆蓋任何其他可能的設置。 */
+	opacity: 1 !important;
+	transform: scale(1) !important;
+}
+
+.card.show .card-title .toggle-info {
+	background: #ff6666 !important;
+}
+
+.card.show .card-title .toggle-info span {
+	top: 15px;
+}
+
+.card.show .card-title .toggle-info .left {
+	right: 10px;
+}
+
+.card.show .card-title .toggle-info .right {
+	left: 10px;
+}
+
+.card.show .card-flap {
+	background: #ffffff;
+	transform: rotateX(0deg);
+}
+
+.card.show .flap1 {
+	transition: all 0.3s 0s ease-out;
+}
+
+.card.show .flap2 {
+	transition: all 0.3s 0.2s ease-out;
+}
+
+.cards td {
+	width: 30vw;
+	height: 30vh;
+	padding: 5px;
+}
+
+/* fukuro.html */
+#fukuroBody {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.fukuroBackground {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('./image/fukurodani.jpg');
+	background-size: cover;
+	background-position: center;
+	opacity: 0.6; /* 設定透明度 */
+	z-index: -1; /* 將其放置在所有其他內容下面 */
+}
+
+.fukuroShell {
+	position: relative;
+	width: auto; /* 讓 .fukuroShell 的寬度根據內容自適應 */
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	/* 設定 3d 變化 */
+	transform-style: preserve-3d;
+	/* 增加透視效果 */
+	perspective: 900px;
+}
+
+.fukuroShell .fukuroBox {
+	position: relative;
+	width: 168px; /* 調整卡片大小，使得七張卡片在網頁上可以一字排開不會換行 */
+	height: 210px;
+	transition: 0.3s;
+	overflow: hidden;
+	margin: 12px;
+	transform: rotateY(0deg);
+	transition-delay: .1s;
+	border-radius: 5px;
+	border: #fff 3px solid;
+}
+
+/* 當滑鼠所有卡片的父元素節點 fukuroShell 上時，所有卡片向 y 軸翻轉 20 度 */
+.fukuroShell:hover .fukuroBox {
+	transform: rotateY(20deg);
+}
+
+/* 當滑鼠懸浮在目前卡片上時，目前卡片的翻轉角度為 0，並放大 1.2, 5 倍，並加陰影 */
+.fukuroShell .fukuroBox:hover {
+	transform: rotateY(0deg) scale(1.25);
+	fukuroBox-shadow: 0 25px 40px rgba(0, 0, 0, 0.7);
+	z-index: 1;
+}
+
+/* 當滑鼠懸浮在卡片上時，目前卡片後面的所有卡片全部都反向翻轉負 20 度 */
+.fukuroShell .fukuroBox:hover~.fukuroBox {
+	transform: rotateY(-20deg);
+}
+
+.fukuroShell .fukuroBox .images img {
+	width: 100%;
+}
+
+.fukuroShell .fukuroBox .content {
+	position: absolute;
+	top: 0;
+	width: 80%;
+	height: 100%;
+	z-index: 999;
+	padding: 15px;
+}
+
+.fukuroShell .fukuroBox .content h2 {
+	position: absolute;
+	top: 15px;
+	right: 3px;
+	color: rgb(255, 255, 255);
+	transition: 0.3s;
+	font-size: 20px;
+	transform: translateY(-100px);
+}
+
+.fukuroShell .fukuroBox:hover .content h2 {
+	transform: translateY(-15px);
+}
+
+.fukuroShell .fukuroBox .content p {
+	color: rgb(0, 0, 0);
+	transition: 0.3s;
+	font-size: 10px;
+	transform: translateY(300px);
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.fukuroShell .fukuroBox:hover .content p {
+	transform: translateY(100px);
+}
+
+/* fox.html */
+#foxBody {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.foxBackground {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('./image/inarizaki.png');
+	background-size: cover;
+	background-position: center;
+	opacity: 0.5; /* 設定透明度 */
+	z-index: -1; /* 將其放置在所有其他內容下面 */
+}
+
+.foxShell{
+	width: 90%;
+	height: 400px;
+	display: flex;
+}
+
+.foxBox{
+	flex: 1;
+	overflow: hidden;
+	transition: .5s;
+	margin: 0 20px;
+	box-shadow: 10px 10px 20px rgba(0, 0, 0, .5);
+	border-radius: 20px;
+	border: 5px solid #fff;
+	background-color: #fff;
+}
+
+.foxBox>img{
+	width: 100%;
+	height: 75%;
+	object-fit: cover;
+	transition: .5s;
+}
+
+.foxBox>span{
+	font: 200 45px;
+	text-align: center;
+	height: 25%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.foxBox:hover{
+	flex-basis: 50%;
+}
+
+.foxBox:hover>img{
+	width: 100%;
+	height: 100%;
+}
+
