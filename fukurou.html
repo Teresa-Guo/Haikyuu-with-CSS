@@ -130,26 +130,30 @@
 	
 		const fukuroBoxes = document.querySelectorAll('.fukuroBox');
 		
-        fukuroBoxes.forEach(box => {
-            box.addEventListener('mouseenter', () => {
-                // 當滑鼠移到某張卡片上時，將其他張卡片天加 dim 的 class 以變透明
-                fukuroBoxes.forEach(otherBox => {
-                    if (otherBox !== box) {
-                        otherBox.classList.add('dim');
-                    }
-                });
-            });
+		function addCardHoverEffect() {
+			fukuroBoxes.forEach(box => {
+				box.addEventListener('mouseenter', () => {
+					// 當滑鼠移到某張卡片上時，將其他張卡片天加 dim 的 class 以變透明
+					fukuroBoxes.forEach(otherBox => {
+						if (otherBox !== box) {
+							otherBox.classList.add('dim');
+						}
+					});
+				});
 
-            // 移除 'dim' class 以恢復不透明
-            box.addEventListener('mouseleave', () => {
-                fukuroBoxes.forEach(otherBox => {
-                    if (otherBox !== box) {
-                        otherBox.classList.remove('dim');
-                    }
-                });
-            });
-        });
-	
+				// 移除 'dim' class 以恢復不透明
+				box.addEventListener('mouseleave', () => {
+					fukuroBoxes.forEach(otherBox => {
+						if (otherBox !== box) {
+							otherBox.classList.remove('dim');
+						}
+					});
+				});
+			});
+		}
+		
+		addCardHoverEffect();
+		
 	</script>
 
 </html>
